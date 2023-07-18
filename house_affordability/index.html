@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex,follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Can I Afford That House? | The Denver Post</title>
+    <link rel="icon" href="https://www.denverpost.com/wp-content/uploads/2016/05/cropped-DP_bug_denverpost.jpg?w=32" sizes="32x32" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="./css/vanilla-tabs.min.css" />
+    <link rel="stylesheet" type="text/css" href="./css/styles.css" />
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <script src="https://extras.denverpost.com/foundation/js/vendor/modernizr.js"></script>
+    <script src="./js/vanilla-tabs.min.js"></script>
+    <script src="./js/scripts.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <h2 class="title">Can I afford that house?</h2>
+        <p>Use these calculators to see how much income you would need to afford a certain home price or how much home you could afford with a certain income. <span class="modal-link">Click underlined descriptions for details</span>. <em>After hitting "Calculate," you can change fields and recalculate &mdash; you don't have to reset the calculator.</em></p>
+        <ul id="tabs-h" class="tabs">
+            <li data-title="Calculate<br>by home price">
+                <p>This calculator will show you how much income you need to afford a home with a certain purchase price.</p>
+                <form name="mortgage-input-home" action="">
+                    <div class="wrapper-input">
+                        <table id="form-input-home">
+                            <tr>
+                                <td class="right">
+                                    <h3 class="subtitle">Enter your<br>numbers here</h3>
+                                </td>
+                                <td class="center">
+                                    <h3 class="fa-solid fa-turn-down"></h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>Home price</label></td>
+                                <td><input type="number" id="home-price" name="home-price" /></td>
+                            </tr>
+                            <tr>
+                                <td><label><a class="modal-link" href="#modal-down-payment-info" rel="modal:open">Down payment %</a></label></td>
+                                <td><input type="number" id="down-payment-pct" name="down-payment-pct" placeholder="%" /></td>
+                            </tr>
+                            <tr>
+                                <td><label><a class="modal-link" href="#modal-interest-rate-info" rel="modal:open">Interest rate</a></label></td>
+                                <td><input type="number" id="apr" name="apr" placeholder="%" /></td>
+                            </tr>
+                            <tr>
+                                <td><label><a class="modal-link" href="#modal-loan-term-info" rel="modal:open">Loan term</a></label></td>
+                                <td><input type="number" id="loan-term" name="loan-term" placeholder="Years" /></td>
+                            </tr>
+                            <tr>
+                                <td><label>Monthly property taxes</label></td>
+                                <td><input type="number" id="property-taxes" name="property-taxes" value="0" /></td>
+                            </tr>
+                            <tr>
+                                <td><label>Monthly homeowner's insurance</label></td>
+                                <td><input type="number" id="insurance" name="insurance" value="0" /></td>
+                            </tr>
+                            <tr>
+                                <td><label>Monthly HOA dues</label></td>
+                                <!-- <td><input type="number" id="hoa-dues" name="hoa-dues" required value="0" /></td> -->
+                                <td><input type="number" id="hoa-dues" name="hoa-dues" value="0" /></td>
+                            </tr>
+                            <tr>
+                                <td><label><a class="modal-link" href="#modal-payment-ratio-info" rel="modal:open">Mortgage-income payment ratio</a></label></td>
+                                <td><input type="number" id="payment-ratio" name="payment-ratio" value="28" placeholder="%" /></td>
+                            </tr>
+                            <tr>
+                                <td><label><a class="modal-link" href="#modal-tax-withholding-info" rel="modal:open">Income tax withholding %</a></label></td>
+                                <td><input type="number" id="tax-withholding" name="tax-withholding" value="30" placeholder="%" /></td>
+                            </tr>
+                            <tr>
+                                <td><input type="button" id="submit-button-home" value="Calculate" /></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="wrapper-output">
+                        <table id="form-output-home">
+                            <tr>
+                                <td class="right">
+                                    <h3 class="subtitle">Here are<br>your results</h3>
+                                </td>
+                                <td class="center">
+                                    <h3 class="fa-solid fa-turn-down"></h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>Loan amount</label></td>
+                                <td><input type="text" id="loan-amount" name="loan-amount" /></td>
+                            </tr>
+                            <tr>
+                                <td><label>Down payment</label></td>
+                                <td><input type="text" id="down-payment" name="down-payment" /></td>
+                            </tr>
+                            <tr>
+                                <td><label>Monthly principal and interest (<a class="modal-link" href="#modal-principal-interest-info" rel="modal:open">P&I</a>)</label></td>
+                                <td><input type="text" id="monthly-payment" name="monthly-payment" /></td>
+                            </tr>
+                            <tr>
+                                <td><strong><label>Total monthly mortgage payment (<a class="modal-link" href="#modal-piti-info" rel="modal:open">PITI</a>)</label></strong></td>
+                                <td><input type="text" id="total-payment" name="total-payment" /></td>
+                            </tr>
+                            <tr>
+                                <td><label><a class="modal-link" href="#modal-net-monthly-income-info" rel="modal:open">Net monthly income</a> required</label></td>
+                                <td><input type="text" id="net-monthly-income" name="net-monthly-income" /></td>
+                            </tr>
+                            <tr>
+                                <td><label><a class="modal-link" href="#modal-gross-monthly-income-info" rel="modal:open">Gross monthly income</a> required</label></td>
+                                <td><input type="text" id="gross-monthly-income" name="gross-monthly-income" /></td>
+                            </tr>
+                            <tr>
+                                <td><strong><label>Gross annual income required</label></strong></td>
+                                <td><input type="text" id="gross-annual-income" name="gross-annual-income" /></td>
+                            </tr>
+                            <tr>
+                                <td><input type="reset" id="reset-button" value="Reset" /></td>
+                            </tr>
+                        </table>
+                    </div>
+                </form>
+            </li>
+            <li data-title="Calculate<br>by income">
+                <p>This calculator will show you how much home you can afford based on your income.</p>
+                <form name="mortgage-input-income" action="">
+                    <div class="wrapper-input wrapper-input-income">
+                        <table id="form-input-income">
+                            <tr>
+                                <td class="right">
+                                    <h3 class="subtitle">Enter your<br>numbers here</h3>
+                                </td>
+                                <td class="center">
+                                    <h3 class="fa-solid fa-turn-down"></h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>Gross annual income</label></td>
+                                <td><input type="number" id="gross-annual-income-2" name="gross-annual-income-2" /></td>
+                            </tr>
+                            <tr>
+                                <td><label><a class="modal-link" href="#modal-tax-withholding-info" rel="modal:open">Income tax withholding %</a></label></td>
+                                <td><input type="number" id="tax-withholding-2" name="tax-withholding-2" value="30" placeholder="%" /></td>
+                            </tr>
+                            <tr>
+                                <td><label>Monthly property taxes</label></td>
+                                <td><input type="number" id="property-taxes-2" name="property-taxes-2" value="0" /></td>
+                            </tr>
+                            <tr>
+                                <td><label>Monthly homeowner's insurance</label></td>
+                                <td><input type="number" id="insurance-2" name="insurance-2" value="0" /></td>
+                            </tr>
+                            <tr>
+                                <td><label>Monthly HOA dues</label></td>
+                                <td><input type="number" id="hoa-dues-2" name="hoa-dues-2" value="0" /></td>
+                            </tr>
+                            <tr>
+                                <td><label><a class="modal-link" href="#modal-down-payment-info" rel="modal:open">Down payment %</a></label></td>
+                                <td><input type="number" id="down-payment-pct-2" name="down-payment-pct-2" placeholder="%" /></td>
+                            </tr>
+                            <tr>
+                                <td><label><a class="modal-link" href="#modal-interest-rate-info" rel="modal:open">Interest rate</a></label></td>
+                                <td><input type="number" id="apr-2" name="apr-2" placeholder="%" /></td>
+                            </tr>
+                            <tr>
+                                <td><label><a class="modal-link" href="#modal-loan-term-info" rel="modal:open">Loan term</a></label></td>
+                                <td><input type="number" id="loan-term-2" name="loan-term-2" placeholder="Years" /></td>
+                            </tr>
+                            <tr>
+                                <td><input type="button" id="submit-button-income" value="Calculate" /></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="wrapper-output wrapper-output-income">
+                        <table id="form-output-income">
+                            <tr>
+                                <td class="right">
+                                    <h3 class="subtitle">Here are<br>your results</h3>
+                                </td>
+                                <td class="center">
+                                    <h3 class="fa-solid fa-turn-down"></h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label><a class="modal-link" href="#modal-net-monthly-income-info" rel="modal:open">Net monthly income</a> required</label></td>
+                                <td><input type="text" id="net-monthly-income-2" name="net-monthly-income-2" /></td>
+                            </tr>
+                            <tr>
+                                <td><label>Monthly principal and interest (<a class="modal-link" href="#modal-principal-interest-info" rel="modal:open">P&I</a>)</label></td>
+                                <td><input type="text" id="monthly-payment-2" name="monthly-payment-2" /></td>
+                            </tr>
+                            <tr>
+                                <td><strong><label>Total monthly mortgage payment (<a class="modal-link" href="#modal-piti-info" rel="modal:open">PITI</a>)</label></strong></td>
+                                <td><input type="text" id="total-payment-2" name="total-payment-2" /></td>
+                            </tr>
+                            <tr>
+                                <td><label>Loan amount</label></td>
+                                <td><input type="text" id="loan-amount-2" name="loan-amount-2" /></td>
+                            </tr>
+                            <tr>
+                                <td><label>Down payment</label></td>
+                                <td><input type="text" id="down-payment-2" name="down-payment-2" /></td>
+                            </tr>
+                            <tr>
+                                <td><strong><label>Maximum home price</label></strong></td>
+                                <td><input type="text" id="home-price-2" name="home-price-2" /></td>
+                            </tr>
+                            <tr>
+                                <td><input type="reset" id="reset-button" value="Reset" /></td>
+                            </tr>
+                        </table>
+                    </div>
+                </form>
+            </li>
+        </ul>
+        <!-- Modals | https://jquerymodal.com -->
+        <div id="modal-home-price" class="modal">
+            <p>Please enter a home price.</p>
+        </div>
+        <div id="modal-down-payment" class="modal">
+            <p>Please enter a down payment percentage.</p>
+        </div>
+        <div id="modal-apr" class="modal">
+            <p>Please enter an interest rate.</p>
+        </div>
+        <div id="modal-loan-term" class="modal">
+            <p>Please enter a loan term.</p>
+        </div>
+        <div id="modal-property-taxes" class="modal">
+            <p>Property tax field needs a value &mdash; 0 is fine.</p>
+        </div>
+        <div id="modal-insurance" class="modal">
+            <p>Homeowner's insurance field needs a value &mdash; 0 is fine.</p>
+        </div>
+        <div id="modal-hoa-dues" class="modal">
+            <p>HOA dues field needs a value &mdash; 0 is fine.</p>
+        </div>
+        <div id="modal-payment-ratio" class="modal">
+            <p>Mortgage-income payment ratio field needs a value &mdash; 28 is standard.</p>
+        </div>
+        <div id="modal-tax-withholding" class="modal">
+            <p>Income tax withholding field needs a value &mdash; 30 is the default.</p>
+        </div>
+        <!-- Calculate by income modals -->
+        <div id="modal-gross-annual-income-2" class="modal">
+            <p>Please enter your gross annual income.</p>
+        </div>
+        <div id="modal-down-payment-2" class="modal">
+            <p>Please enter a down payment percentage.</p>
+        </div>
+        <div id="modal-apr-2" class="modal">
+            <p>Please enter an interest rate.</p>
+        </div>
+        <div id="modal-loan-term-2" class="modal">
+            <p>Please enter a loan term.</p>
+        </div>
+        <div id="modal-property-taxes-2" class="modal">
+            <p>Property tax field needs a value &mdash; 0 is fine.</p>
+        </div>
+        <div id="modal-insurance-2" class="modal">
+            <p>Homeowner's insurance field needs a value &mdash; 0 is fine.</p>
+        </div>
+        <div id="modal-hoa-dues-2" class="modal">
+            <p>HOA dues field needs a value &mdash; 0 is fine.</p>
+        </div>
+        <!-- <div id="modal-payment-ratio" class="modal">
+            <p>Mortgage-income payment ratio field needs a value &mdash; 28 is standard.</p>
+        </div> -->
+        <div id="modal-tax-withholding-2" class="modal">
+            <p>Income tax withholding field needs a value &mdash; 30 is the default.</p>
+        </div>
+        <!-- Explanation modals -->
+        <div id="modal-down-payment-info" class="modal">
+            <p>The amount of money you put down to buy the house. Typically you need to put 20% down to avoid mortgage insurance, though <a href="https://www.nar.realtor/sites/default/files/documents/2021-home-buyers-and-sellers-generational-trends-03-16-2021.pdf" target="_blank">the median down payment is 12%</a>.</p>
+        </div>
+        <div id="modal-interest-rate-info" class="modal">
+            <p>The interest rate the bank charges on your mortgage loan.</p>
+        </div>
+        <div id="modal-loan-term-info" class="modal">
+            <p>The number of years it will take to pay off your mortgage loan. Making larger payments can decrease the time it takes to pay off your loan.</p>
+        </div>
+        <div id="modal-payment-ratio-info" class="modal">
+            <p>A common rule of thumb is you should spend 28% or less of your monthly gross income on your mortgage payment.</p>
+        </div>
+        <div id="modal-tax-withholding-info" class="modal">
+            <p>"When you look at your paycheck and how fat it is and you see this one number that you never get and the number you actually get, everything in between is the withholding. It's the The Federal Insurance Contributions Act and Medicare and federal income tax and all the other stuff you might do, pre-tax," Engelstad said.</p>
+        </div>
+        <div id="modal-principal-interest-info" class="modal">
+            <p>Principal & Interest: The principal is the money you borrow for the mortgage and the interest is the fee charged by the bank for loaning you the principal.</p>
+        </div>
+        <div id="modal-piti-info" class="modal">
+            <p>Principal, Interest, Taxes, Insurance: Your total monthly mortgage payment, made up of the principal, interest, property taxes, homeowner's insurance, homeowner's association (HOA) dues and mortgage insurance, if applicable.</p>
+        </div>
+        <div id="modal-net-monthly-income-info" class="modal">
+            <p>Net monthly income is your "take-home pay," the amount you're left with after all the deductions are taken out of your gross monthly pay.</p>
+        </div>
+        <div id="modal-gross-monthly-income-info" class="modal">
+            <p>Gross monthly income is the total pay you earn before any deductions are taken out.</p>
+        </div>
+    </div>
+    <script>
+    new VanillaTabs({
+        'selector': '#tabs-h', // default is ".tabs"
+        'type': 'horizontal', // can be horizontal / vertical / accordion
+        'responsiveBreak': 540, // tabs become accordion on this device width
+        'activeIndex': -1 // active tab index (starts from 0 ). Can be -1 for accordions.
+    });
+    </script>
+</body>
+
+</html>
